@@ -1,0 +1,23 @@
+
+div.container-fluid
+	div.panel-group#accordion
+
+		div(ng-repeat="head in vm.heads").panel.panel-default
+			div.panel-heading
+				h4.panel-title
+					a(data-toggle="collapse",data-parent="#accordion",ng-href='{{head | link}}') {{head}}
+						
+			div(id="{{head}}",ng-class="{'panel-collapse':true,collapse:true,in: head == 'title'}")
+				div.panel-body
+					form.form-horizontal
+						div(ng-repeat='option in vm.option[head]').form-group
+							label.col-md-1.tontrol-label {{option.name}}
+							div.col-md-11
+								input.form-control
+						
+
+
+
+
+
+					
