@@ -1,20 +1,33 @@
 
 div.container-fluid
-	div.panel-group#accordion
-
-		div(ng-repeat="head in vm.heads").panel.panel-default
-			div.panel-heading
-				h4.panel-title
-					a(data-toggle="collapse",data-parent="#accordion",ng-href='{{head | link}}') {{head}}
+	div.row
+		div.col-md-7
+			div(chart="{{chartOption}}").m-chart
+			div.col-md-1
+				button(type="button",class="btn btn-primary f-mt10",ng-click="showOption()") render
+			div.col-md-1
+				button(type="button",class="btn btn-primary f-mt10") show option
+		div.col-md-5.m-option
+			div.panel-group#accordion
+				div(ng-repeat="head in vm.heads").panel.panel-default
+					div.panel-heading
+						h4.panel-title
+							a(data-toggle="collapse",data-parent="#accordion",ng-href='{{head | link}}') {{head}}			
+					div(id="{{head}}",ng-class="{'panel-collapse':true,collapse:true,in: head == 'title'}")
+						div.panel-body
+							form.form-horizontal
+								div(ng-repeat='option in vm.option[head]').form-group
+									div.col-md-3
+										label.col-md-1.tontrol-label {{option.name}}
+									div.col-md-9
+										div(ng-show="option.valueType=='json'")
+											div(ng-repeat="o in option.value")
+												input(ng-model="o.value").form-control
+										div(ng-hide="option.valueType=='json'")
+											input(ng-model="option.value").form-control
 						
-			div(id="{{head}}",ng-class="{'panel-collapse':true,collapse:true,in: head == 'title'}")
-				div.panel-body
-					form.form-horizontal
-						div(ng-repeat='option in vm.option[head]').form-group
-							label.col-md-1.tontrol-label {{option.name}}
-							div.col-md-11
-								input.form-control
-						
+	
+		
 
 
 
